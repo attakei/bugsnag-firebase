@@ -1,0 +1,14 @@
+{
+  "name": "@attakei/bugsnag-firebase",
+  "version": "0.1.0",
+  "description": "Bugsnag wrapper for Cloud Functions in Firebase",
+  "keywords": [
+    "bugsnag",
+    "firebase"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": "https://github.com/attakei/bugsnag-firebase.git",
+  "author": "Kazuya Takei <attakei@gmail.com>",
+  "license": "Apache-2.0"
+}
