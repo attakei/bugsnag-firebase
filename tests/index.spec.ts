@@ -4,10 +4,10 @@ describe('Stub', () => {
   let wrapper: BugsnagWrappers;
 
   beforeEach(() => {
-    wrapper = configureBugsnag('');
+    wrapper = configureBugsnag('mocked-api-key');
   });
 
   it('It is first test case', () => {
-    expect(wrapper).toMatchObject({});
+    expect(wrapper).toHaveProperty('bugsnagClient');
   });
 });
