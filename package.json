@@ -13,6 +13,8 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@bugsnag/js": "^6.4.3",
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.5",
     "@typescript-eslint/eslint-plugin": "^2.5.0",
     "@typescript-eslint/parser": "^2.5.0",
     "eslint": "^6.5.1",
@@ -22,11 +24,14 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "firebase-functions": "^3.3.0",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
+    "ts-jest": "^24.1.0",
     "typescript": "^3.6.4"
   },
   "scripts": {
     "lint": "eslint src/**/*.ts",
+    "test": "jest",
     "build": "tsc"
   }
 }
