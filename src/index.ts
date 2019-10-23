@@ -1,7 +1,7 @@
 /**
  * @todo This is stub. Implement it!
  */
-type BugsnagWrappers = {};
+export type BugsnagWrappers = {};
 
 /**
  * Configure bugsnag client and prepare wrapper functions per any events.

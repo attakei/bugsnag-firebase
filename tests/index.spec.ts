@@ -1,3 +1,13 @@
+import { configureBugsnag, BugsnagWrappers } from '~/index';
+
 describe('Stub', () => {
-  it('It is first test case', () => {});
+  let wrapper: BugsnagWrappers;
+
+  beforeEach(() => {
+    wrapper = configureBugsnag('');
+  });
+
+  it('It is first test case', () => {
+    expect(wrapper).toMatchObject({});
+  });
 });
