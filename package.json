@@ -38,5 +38,12 @@
     "singleQuote": true,
     "jsxSingleQuote": true,
     "trailingComma": "all"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^~/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }
