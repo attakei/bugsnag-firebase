@@ -10,5 +10,11 @@
   "types": "dist/index.d.ts",
   "repository": "https://github.com/attakei/bugsnag-firebase.git",
   "author": "Kazuya Takei <attakei@gmail.com>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "typescript": "^3.6.4"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
 }
