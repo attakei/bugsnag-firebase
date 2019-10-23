@@ -33,5 +33,10 @@
     "lint": "eslint src/**/*.ts",
     "test": "jest",
     "build": "tsc"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "trailingComma": "all"
   }
 }
