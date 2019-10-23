@@ -10,4 +10,4 @@ type BugsnagWrappers = {};
  */
 export const configureBugsnag = (apiKey: string): BugsnagWrappers => {
   return {};
-}
+};
