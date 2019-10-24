@@ -2,7 +2,7 @@
  * For HTTP trigger functions
  */
 import { Bugsnag } from '@bugsnag/js';
-import { https, HttpsFunction, Runnable } from 'firebase-functions';
+import { https, HttpsFunction, Request, Response, Runnable } from 'firebase-functions';
 
 /**
  * Type alias for https.onCall handler
@@ -27,6 +27,8 @@ export const httpsOnCallWrapper = <D, R>(client: Bugsnag.Client, handler: HttpsC
   }
 }
 
+// export const httpsOnRequestWrapper = (req: https.Request, res: https.R) 
+
 /**
  * Module wrapper for `functions.https` to use likely firebase-functions module by user.
  */
@@ -40,5 +42,20 @@ export class HttpsModule {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public onCall<D, R>(handler: HttpsCallable<D, R>): HttpsFunction & Runnable<any> {
     return https.onCall(httpsOnCallWrapper(this.client, handler))
+  }
+
+  /**
+   * 
+   * @todo Add test
+   */
+  public onRequest(handler: (req: Request, res: Response) => HttpsFunction): HttpsFunction {
+    return https.onRequest((req, res) => {
+      try {
+        handler(req, res);
+      } catch (err) {
+        this.client.notify(err);
+        throw err;
+      }
+    });
   }
 }
