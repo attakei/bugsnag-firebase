@@ -34,4 +34,24 @@ describe('https callable functions', () => {
       })
     done();
   });
+
+  it('catch reject', async (done) => {
+    const mockedClient = {
+      notify: (error: Bugsnag.NotifiableError) => error,
+    }
+    const mockedNotify = jest.spyOn(mockedClient, 'notify');
+    const stubTarget: t.HttpsCallable<{}, Promise<void>> = (data, ctx) => {
+      return new Promise((_, reject) => reject(new Error('Stub-error')));
+    }; 
+    const wrapped = t.httpsOnCallWrapper(mockedClient as Bugsnag.Client, stubTarget);
+    mockedNotify.mockImplementation((error: Bugsnag.NotifiableError) => error);
+    await wrapped({}, {} as https.CallableContext)
+      .then(() => {
+        fail('Cannot access it');
+      })
+      .catch(err => {
+        expect(String(err)).toBe('Error: Stub-error');
+      })
+    done();
+  });
 });
