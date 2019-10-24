@@ -11,20 +11,27 @@ const stubThrowError: t.HttpsCallable<{}, boolean> = (data, ctx) => {
 };
 
 describe('https callable functions', () => {
-  it('error is not thrown', () => {
+  it('error is not thrown', async (done) => {
     const client = bugsnag('mock-api-key');
     const wrapped = t.httpsOnCallWrapper(client, stubRegular);
-    expect(wrapped({}, {} as https.CallableContext)).toBeTruthy();
+    expect(await wrapped({}, {} as https.CallableContext)).toBeTruthy();
+    done();
   });
 
-  it('catch error', () => {
+  it('catch error', async (done) => {
     const mockedClient = {
       notify: (error: Bugsnag.NotifiableError) => error,
     }
     const mockedNotify = jest.spyOn(mockedClient, 'notify');
     mockedNotify.mockImplementation((error: Bugsnag.NotifiableError) => error);
     const wrapped = t.httpsOnCallWrapper(mockedClient as Bugsnag.Client, stubThrowError);
-    expect(() => wrapped({}, {} as https.CallableContext)).toThrowError(Error)
-    expect(mockedNotify).toBeCalled();
+    await wrapped({}, {} as https.CallableContext)
+      .then(() => {
+        fail('Cannot access it');
+      })
+      .catch(err => {
+        expect(String(err)).toBe('Error: Stub-error');
+      })
+    done();
   });
 });
