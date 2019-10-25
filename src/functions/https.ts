@@ -16,10 +16,24 @@ export type HttpsCallable<D, R> = (data: D, ctx: https.CallableContext) => R;
  * @param client Bugsnag client instance
  * @param handler Main handler by user
  */
-export const httpsOnCallWrapper = <D, R>(client: Bugsnag.Client, handler: HttpsCallable<D, R>): HttpsCallable<D, R> => {
-  return (data: D, ctx: https.CallableContext): R => {
+export const httpsOnCallWrapper = <D, R>(
+  client: Bugsnag.Client,
+  handler: HttpsCallable<D, R>,
+): HttpsCallable<D, Promise<R>> => {
+  return async (data: D, ctx: https.CallableContext): Promise<R> => {
     try {
-      return handler(data, ctx)
+      const promise = new Promise<R>((resolve, reject) => {
+        try {
+          const result = handler(data, ctx);
+          resolve(result);
+        } catch(err) {
+          reject(err);
+        }
+      });
+      return await promise
+        .catch(err => {
+          throw err;
+        });
     } catch (err) {
       client.notify(err);
       throw err;
