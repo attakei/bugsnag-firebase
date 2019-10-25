@@ -14,7 +14,7 @@ export declare type HttpsCallable<D, R> = (data: D, ctx: https.CallableContext) 
  * @param client Bugsnag client instance
  * @param handler Main handler by user
  */
-export declare const httpsOnCallWrapper: <D, R>(client: Bugsnag.Client, handler: HttpsCallable<D, R>) => HttpsCallable<D, R>;
+export declare const httpsOnCallWrapper: <D, R>(client: Bugsnag.Client, handler: HttpsCallable<D, R>) => HttpsCallable<D, Promise<R>>;
 /**
  * Module wrapper for `functions.https` to use likely firebase-functions module by user.
  */

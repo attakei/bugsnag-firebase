@@ -8,9 +8,21 @@ const firebase_functions_1 = require("firebase-functions");
  * @param handler Main handler by user
  */
 exports.httpsOnCallWrapper = (client, handler) => {
-    return (data, ctx) => {
+    return async (data, ctx) => {
         try {
-            return handler(data, ctx);
+            const promise = new Promise((resolve, reject) => {
+                try {
+                    const result = handler(data, ctx);
+                    resolve(result);
+                }
+                catch (err) {
+                    reject(err);
+                }
+            });
+            return await promise
+                .catch(err => {
+                throw err;
+            });
         }
         catch (err) {
             client.notify(err);
