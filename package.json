@@ -1,6 +1,6 @@
 {
   "name": "@attakei/bugsnag-firebase",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Bugsnag wrapper for Cloud Functions in Firebase",
   "keywords": [
     "bugsnag",

@@ -10,8 +10,8 @@ const https_1 = require("./functions/https");
  *
  * @param apiKey Bugsnag API key
  */
-exports.configureBugsnag = (apiKey) => {
-    const client = js_1.default(apiKey);
+exports.configureBugsnag = (apiConfig) => {
+    const client = js_1.default(apiConfig);
     return {
         https: new https_1.HttpsModule(client),
     };
