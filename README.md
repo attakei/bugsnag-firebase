@@ -30,7 +30,7 @@ import { configureBugsnag } from '@attakei/bugsnag-firebase';
 const bugsnagFunctions = configuerBugsnag('bugsnag-api-key');
 
 /**
- * bugsnagFunctions has `http.onCall` that behavior same as original firebase-functions.
+ * bugsnagFunctions has `https.onCall` that behavior same as original firebase-functions.
  */
 export A_HTTPS_CALLABLE = bugsnagFunctions.https.onCall((data, ctx) => {
     return 'hello world';
