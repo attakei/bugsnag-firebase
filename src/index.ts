@@ -1,4 +1,4 @@
-import bugsnag from '@bugsnag/js';
+import bugsnag, { Bugsnag } from '@bugsnag/js';
 import { HttpsModule } from './functions/https';
 
 /**
@@ -13,8 +13,8 @@ export type BugsnagWrapperModules = {
  *
  * @param apiKey Bugsnag API key
  */
-export const configureBugsnag = (apiKey: string): BugsnagWrapperModules => {
-  const client = bugsnag(apiKey);
+export const configureBugsnag = (apiConfig: string | Bugsnag.IConfig): BugsnagWrapperModules => {
+  const client = bugsnag(apiConfig);
   return {
     https: new HttpsModule(client),
   };

@@ -1,6 +1,6 @@
 # @attakei/bugsnag-firebase
 
-JavaScript Bugsnag helper for Cloud Functions.
+JavaScript Bugsnag wrapper for Cloud Functions.
 
 ## Description
 
@@ -22,12 +22,15 @@ yarn add @attakei/bugsnag-firebase
 
 ## Usage
 
-When you declare endpoint to Cloud Functions, wrap callable hander.
+When you declare endpoint to Cloud Functions, use busnagFunctions from configureBugsnag instead of firebase-functions.
 
 ```nodejs
 import { configureBugsnag } from '@attakei/bugsnag-firebase';
 
-const bugsnagFunctions = configuerBugsnag('bugsnag-api-key');
+const bugsnagFunctions = configureBugsnag({
+    // Your bugsnag configurations
+    apiKey: 'your-api-key',
+});
 
 /**
  * bugsnagFunctions has `https.onCall` that behavior same as original firebase-functions.
