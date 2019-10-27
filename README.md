@@ -27,7 +27,10 @@ When you declare endpoint to Cloud Functions, wrap callable hander.
 ```nodejs
 import { configureBugsnag } from '@attakei/bugsnag-firebase';
 
-const bugsnagFunctions = configuerBugsnag('bugsnag-api-key');
+const bugsnagFunctions = configuerBugsnag({
+    // Your bugsnag configurations
+    apiKey: 'your-api-key',
+});
 
 /**
  * bugsnagFunctions has `https.onCall` that behavior same as original firebase-functions.
